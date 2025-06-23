@@ -19,7 +19,8 @@ export const login = async (
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax'
+      sameSite: 'lax',
+      path: "/"
     })
     res.status(200).json({ data: { message: 'Logged in.' } })
   } catch (error) {
