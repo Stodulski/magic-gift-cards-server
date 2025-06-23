@@ -18,7 +18,7 @@ export const login = async (
     res.cookie('token', token, {
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: false,
       sameSite: 'strict'
     })
     res.status(200).json({ data: { message: 'Logged in.' } })
