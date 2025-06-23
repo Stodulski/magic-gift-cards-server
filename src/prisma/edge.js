@@ -160,6 +160,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -167,7 +171,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
@@ -186,8 +190,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel Place {\n  id    Int    @id @default(autoincrement())\n  name  String @db.VarChar(50)\n  Codes Code[]\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  username String @unique @db.VarChar(20)\n  password String @db.VarChar(255)\n}\n\nmodel Code {\n  id        Int      @id @default(autoincrement())\n  code      String   @unique @db.VarChar(10)\n  used      Boolean? @default(false)\n  email     String   @db.VarChar(255)\n  name      String   @db.VarChar(100)\n  phone     String   @db.VarChar(50)\n  locality  String   @db.VarChar(50)\n  province  String   @db.VarChar(50)\n  usedAt    String?  @db.VarChar(100)\n  createdAt String   @db.VarChar(100)\n  placeId   Int?\n  Place     Place?   @relation(fields: [placeId], references: [id])\n}\n",
-  "inlineSchemaHash": "cf56c15789f5299640efa213f084323250faf6450bbc4db49c802849d4b71d40",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel Place {\n  id    Int    @id @default(autoincrement())\n  name  String @db.VarChar(50)\n  Codes Code[]\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  username String @unique @db.VarChar(20)\n  password String @db.VarChar(255)\n}\n\nmodel Code {\n  id        Int      @id @default(autoincrement())\n  code      String   @unique @db.VarChar(10)\n  used      Boolean? @default(false)\n  email     String   @db.VarChar(255)\n  name      String   @db.VarChar(100)\n  phone     String   @db.VarChar(50)\n  locality  String   @db.VarChar(50)\n  province  String   @db.VarChar(50)\n  usedAt    String?  @db.VarChar(100)\n  createdAt String   @db.VarChar(100)\n  placeId   Int?\n  Place     Place?   @relation(fields: [placeId], references: [id])\n}\n",
+  "inlineSchemaHash": "d30aaeaf089be3acee63a739a5f09d4ab89b4aaad40fb92ebc3c51707360c8f2",
   "copyEngine": true
 }
 config.dirname = '/'

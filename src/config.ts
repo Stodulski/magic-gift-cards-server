@@ -28,6 +28,7 @@ app.use(
     credentials: true
   })
 )
+app.set('trust proxy', true)
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.json())
