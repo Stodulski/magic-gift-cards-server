@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "prisma:generate": "prisma generate",
     "test": "jest --verbose --silent",
     "build": "prisma generate && tsc",
     "start": "node dist/app.js",
