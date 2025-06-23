@@ -11,7 +11,7 @@ import loginSchema from './schemas/login.schema'
 router.post('/auth', checkEntryData(loginSchema), authController.login)
 
 // Endpoint for close session
-router.delete('/auth', verifySession, authController.logout)
+router.delete('/auth', authController.logout)
 
 // Endpoint for verify session on front-end
 router.get('/auth', verifySession, (req: Request, res: Response) => {
