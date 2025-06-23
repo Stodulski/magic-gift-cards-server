@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Place {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(50)
+  Codes Code[]
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique @db.VarChar(20)
+  password String @db.VarChar(255)
+}
+
+model Code {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique @db.VarChar(10)
+  used      Boolean? @default(false)
+  email     String   @db.VarChar(255)
+  name      String   @db.VarChar(100)
+  phone     String   @db.VarChar(50)
+  locality  String   @db.VarChar(50)
+  province  String   @db.VarChar(50)
+  usedAt    String?  @db.VarChar(100)
+  createdAt String   @db.VarChar(100)
+  placeId   Int?
+  Place     Place?   @relation(fields: [placeId], references: [id])
+}
