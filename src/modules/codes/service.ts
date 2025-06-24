@@ -26,7 +26,8 @@ export const setUsed = async (code: string, userId: number) => {
     await codeModel.findOne(code)
     const date = new Date()
     const formattedDate = date.toLocaleString('es-AR', {
-      timeZone: 'America/Argentina/Buenos_Aires'
+      timeZone: 'America/Argentina/Buenos_Aires',
+      hour12: false
     })
     await codeModel.update(code, userId, formattedDate)
   } catch (error: any) {
