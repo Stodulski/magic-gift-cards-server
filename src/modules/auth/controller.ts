@@ -21,22 +21,23 @@ export const login = async (
       sameSite: 'none',
       path: '/'
     })
-    res
-      .status(200)
-      .json({
-        data: {
-          message: 'Logged in.',
-          user: { name: user.name, role: user.role, id: user.id }
-        }
-      })
+    res.status(200).json({
+      data: {
+        message: 'Logged in.',
+        user: { name: user.name, role: user.role, id: user.id }
+      }
+    })
   } catch (error) {
     next(error)
   }
 }
 
 export const logout = async (req: Request, res: Response) => {
-  res
-    .clearCookie('token')
-    .status(200)
-    .json({ data: { message: 'Logged out.' } })
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'none',
+    path: '/'
+  })
+  res.status(200).json({ data: { message: 'Logged out.' } })
 }
