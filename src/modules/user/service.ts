@@ -1,9 +1,9 @@
-import * as placeModel from './model'
+import * as userModel from './model'
 import { ApiError } from '../../middlewares/errorHandler'
 
-export const getAll = async () => {
+export const getAllBranch = async () => {
   try {
-    return await placeModel.getAll()
+    return await userModel.getAllBranch()
   } catch (error) {
     if (error instanceof ApiError) {
       throw error

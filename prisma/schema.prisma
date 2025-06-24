@@ -1,8 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output = "../src/prisma"
+  provider      = "prisma-client-js"
+  output        = "../src/prisma"
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
-
 }
 
 datasource db {
@@ -11,16 +10,19 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Place {
-  id    Int    @id @default(autoincrement())
-  name  String @db.VarChar(50)
-  Codes Code[]
+enum UserRole {
+  ADMIN
+  DASHBOARD
+  BRANCH
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique @db.VarChar(20)
-  password String @db.VarChar(255)
+  id       Int      @id @default(autoincrement())
+  username String   @unique @db.VarChar(20)
+  password String   @db.VarChar(255)
+  name     String   @db.VarChar(50)
+  role     UserRole @default(BRANCH)
+  Codes    Code[]
 }
 
 model Code {
@@ -34,6 +36,7 @@ model Code {
   province  String   @db.VarChar(50)
   usedAt    String?  @db.VarChar(100)
   createdAt String   @db.VarChar(100)
-  placeId   Int?
-  Place     Place?   @relation(fields: [placeId], references: [id])
+  webId     String   @db.VarChar(10)
+  userId    Int?
+  User    User?    @relation(fields: [userId], references: [id])
 }

@@ -1,19 +1,23 @@
-import { ApiError } from "./errorHandler"
-import { Request, Response, NextFunction } from "express"
-import { verifyToken } from "../modules/auth/helpers/jwt"
+import { ApiError } from './errorHandler'
+import { Response, NextFunction } from 'express'
+import { verifyToken } from '../modules/auth/helpers/jwt'
+import { UserRole } from '../prisma'
+import { AuthenticatedRequest } from '../modules/auth/types/auth.types'
 
 // Middleware verify session
 const verifySession = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   const token = req.cookies.token as string
   try {
-    verifyToken(token)
+    const decoded = verifyToken(token) as { name: string; role: UserRole, id:number }
+    console.log(decoded)
+    req.user = decoded
     next()
   } catch (error) {
-    throw new ApiError(401, "Unauthorized.")
+    throw new ApiError(401, 'Unauthorized.')
   }
 }
 

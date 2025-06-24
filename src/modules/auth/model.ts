@@ -12,7 +12,7 @@ export const findUserWithPassword = async (
       where: {
         username
       },
-      select: { username: true, password: true }
+      select: { username: true, password: true, role: true, name: true, id: true }
     })
     // if no user exists, return error
     if (!user) throw new ApiError(401, 'Usuario incorrecto.')

@@ -9,7 +9,8 @@ export const create = async (
   email: string,
   locality: string,
   province: string,
-  phone: string
+  phone: string,
+  webId: string
 ) => {
   try {
     await prisma.code.create({
@@ -20,6 +21,7 @@ export const create = async (
         locality,
         province,
         phone,
+        webId,
         createdAt: new Date().toLocaleString('es-AR')
       }
     })
@@ -40,13 +42,15 @@ export const findOne = async (code: string) => {
       },
       select: {
         used: true,
-        Place: {
-          select:{
-          name: true}
+        User: {
+          select: {
+            name: true
+          }
         }
       }
     })
-    if (result?.used) throw new ApiError(400, `Codigo usado en ${result.Place?.name}`)
+    if (result?.used)
+      throw new ApiError(400, `Codigo usado en ${result.User?.name}`)
     if (!result) throw new ApiError(400, 'El codigo no exister.')
   } catch (error: any) {
     if (error instanceof ApiError) {
@@ -56,7 +60,7 @@ export const findOne = async (code: string) => {
   }
 }
 
-export const update = async (code: string, placeId: number, usedAt: string) => {
+export const update = async (code: string, userId: number, usedAt: string) => {
   try {
     await prisma.code.update({
       where: {
@@ -65,7 +69,7 @@ export const update = async (code: string, placeId: number, usedAt: string) => {
       data: {
         used: true,
         usedAt,
-        placeId
+        userId
       }
     })
   } catch (error) {

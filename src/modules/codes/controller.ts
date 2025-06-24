@@ -7,8 +7,8 @@ export const createCode = async (
   next: NextFunction
 ) => {
   try {
-    const { code, name, email, locality, province, phone } = req.body
-    await codeService.create(code, name, email, locality, province, phone)
+    const { code, name, email, locality, province, phone, webId } = req.body
+    await codeService.create(code, name, email, locality, province, phone, webId)
     res.status(200).json({ data: { message: 'Code created.' } })
   } catch (error) {
     next(error)
@@ -21,8 +21,8 @@ export const updateCode = async (
   next: NextFunction
 ) => {
   try {
-    const { code, placeId } = req.body
-    await codeService.setUsed(code, parseInt(placeId))
+    const { code, userId } = req.body
+    await codeService.setUsed(code, parseInt(userId))
     res.status(200).json({ data: { message: 'Code used succesfully.' } })
   } catch (error) {
     next(error)

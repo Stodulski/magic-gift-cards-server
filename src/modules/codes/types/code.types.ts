@@ -9,7 +9,7 @@ export type PaginationOptions = {
     id: boolean
     code: boolean
     usedAt: boolean
-    Place: {
+    User: {
         select:{
             id: boolean
             name: boolean

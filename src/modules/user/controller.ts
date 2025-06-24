@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import * as placeService from './service'
+import * as userService from './service'
 
 export const getAllPlaces = async (
   req: Request,
@@ -7,7 +7,7 @@ export const getAllPlaces = async (
   next: NextFunction
 ) => {
   try {
-    const places = await placeService.getAll()
+    const places = await userService.getAllBranch()
     res.status(200).json({
       data: {
         message: 'Places retrieved successfully.',

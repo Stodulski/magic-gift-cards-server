@@ -14,11 +14,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Place
- * 
- */
-export type Place = $Result.DefaultSelection<Prisma.$PlacePayload>
-/**
  * Model User
  * 
  */
@@ -30,14 +25,32 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 export type Code = $Result.DefaultSelection<Prisma.$CodePayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const UserRole: {
+  ADMIN: 'ADMIN',
+  DASHBOARD: 'DASHBOARD',
+  BRANCH: 'BRANCH'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+}
+
+export type UserRole = $Enums.UserRole
+
+export const UserRole: typeof $Enums.UserRole
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Places
- * const places = await prisma.place.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  *
@@ -57,8 +70,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Places
-   * const places = await prisma.place.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    *
    *
@@ -155,16 +168,6 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.place`: Exposes CRUD operations for the **Place** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Places
-    * const places = await prisma.place.findMany()
-    * ```
-    */
-  get place(): Prisma.PlaceDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -623,7 +626,6 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Place: 'Place',
     User: 'User',
     Code: 'Code'
   };
@@ -644,84 +646,10 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "place" | "user" | "code"
+      modelProps: "user" | "code"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      Place: {
-        payload: Prisma.$PlacePayload<ExtArgs>
-        fields: Prisma.PlaceFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PlaceFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PlaceFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>
-          }
-          findFirst: {
-            args: Prisma.PlaceFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PlaceFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>
-          }
-          findMany: {
-            args: Prisma.PlaceFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>[]
-          }
-          create: {
-            args: Prisma.PlaceCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>
-          }
-          createMany: {
-            args: Prisma.PlaceCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PlaceCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>[]
-          }
-          delete: {
-            args: Prisma.PlaceDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>
-          }
-          update: {
-            args: Prisma.PlaceUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>
-          }
-          deleteMany: {
-            args: Prisma.PlaceDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PlaceUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PlaceUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>[]
-          }
-          upsert: {
-            args: Prisma.PlaceUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PlacePayload>
-          }
-          aggregate: {
-            args: Prisma.PlaceAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePlace>
-          }
-          groupBy: {
-            args: Prisma.PlaceGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PlaceGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PlaceCountArgs<ExtArgs>
-            result: $Utils.Optional<PlaceCountAggregateOutputType> | number
-          }
-        }
-      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -954,7 +882,6 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    place?: PlaceOmit
     user?: UserOmit
     code?: CodeOmit
   }
@@ -1047,32 +974,32 @@ export namespace Prisma {
 
 
   /**
-   * Count Type PlaceCountOutputType
+   * Count Type UserCountOutputType
    */
 
-  export type PlaceCountOutputType = {
+  export type UserCountOutputType = {
     Codes: number
   }
 
-  export type PlaceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Codes?: boolean | PlaceCountOutputTypeCountCodesArgs
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Codes?: boolean | UserCountOutputTypeCountCodesArgs
   }
 
   // Custom InputTypes
   /**
-   * PlaceCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type PlaceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PlaceCountOutputType
+     * Select specific fields to fetch from the UserCountOutputType
      */
-    select?: PlaceCountOutputTypeSelect<ExtArgs> | null
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * PlaceCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type PlaceCountOutputTypeCountCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CodeWhereInput
   }
 
@@ -1080,1071 +1007,6 @@ export namespace Prisma {
   /**
    * Models
    */
-
-  /**
-   * Model Place
-   */
-
-  export type AggregatePlace = {
-    _count: PlaceCountAggregateOutputType | null
-    _avg: PlaceAvgAggregateOutputType | null
-    _sum: PlaceSumAggregateOutputType | null
-    _min: PlaceMinAggregateOutputType | null
-    _max: PlaceMaxAggregateOutputType | null
-  }
-
-  export type PlaceAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type PlaceSumAggregateOutputType = {
-    id: number | null
-  }
-
-  export type PlaceMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-  }
-
-  export type PlaceMaxAggregateOutputType = {
-    id: number | null
-    name: string | null
-  }
-
-  export type PlaceCountAggregateOutputType = {
-    id: number
-    name: number
-    _all: number
-  }
-
-
-  export type PlaceAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type PlaceSumAggregateInputType = {
-    id?: true
-  }
-
-  export type PlaceMinAggregateInputType = {
-    id?: true
-    name?: true
-  }
-
-  export type PlaceMaxAggregateInputType = {
-    id?: true
-    name?: true
-  }
-
-  export type PlaceCountAggregateInputType = {
-    id?: true
-    name?: true
-    _all?: true
-  }
-
-  export type PlaceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Place to aggregate.
-     */
-    where?: PlaceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Places to fetch.
-     */
-    orderBy?: PlaceOrderByWithRelationInput | PlaceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PlaceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Places from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Places.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Places
-    **/
-    _count?: true | PlaceCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: PlaceAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PlaceSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PlaceMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PlaceMaxAggregateInputType
-  }
-
-  export type GetPlaceAggregateType<T extends PlaceAggregateArgs> = {
-        [P in keyof T & keyof AggregatePlace]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePlace[P]>
-      : GetScalarType<T[P], AggregatePlace[P]>
-  }
-
-
-
-
-  export type PlaceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PlaceWhereInput
-    orderBy?: PlaceOrderByWithAggregationInput | PlaceOrderByWithAggregationInput[]
-    by: PlaceScalarFieldEnum[] | PlaceScalarFieldEnum
-    having?: PlaceScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PlaceCountAggregateInputType | true
-    _avg?: PlaceAvgAggregateInputType
-    _sum?: PlaceSumAggregateInputType
-    _min?: PlaceMinAggregateInputType
-    _max?: PlaceMaxAggregateInputType
-  }
-
-  export type PlaceGroupByOutputType = {
-    id: number
-    name: string
-    _count: PlaceCountAggregateOutputType | null
-    _avg: PlaceAvgAggregateOutputType | null
-    _sum: PlaceSumAggregateOutputType | null
-    _min: PlaceMinAggregateOutputType | null
-    _max: PlaceMaxAggregateOutputType | null
-  }
-
-  type GetPlaceGroupByPayload<T extends PlaceGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PlaceGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PlaceGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PlaceGroupByOutputType[P]>
-            : GetScalarType<T[P], PlaceGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PlaceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    Codes?: boolean | Place$CodesArgs<ExtArgs>
-    _count?: boolean | PlaceCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["place"]>
-
-  export type PlaceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-  }, ExtArgs["result"]["place"]>
-
-  export type PlaceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-  }, ExtArgs["result"]["place"]>
-
-  export type PlaceSelectScalar = {
-    id?: boolean
-    name?: boolean
-  }
-
-  export type PlaceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["place"]>
-  export type PlaceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Codes?: boolean | Place$CodesArgs<ExtArgs>
-    _count?: boolean | PlaceCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type PlaceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type PlaceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $PlacePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Place"
-    objects: {
-      Codes: Prisma.$CodePayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      name: string
-    }, ExtArgs["result"]["place"]>
-    composites: {}
-  }
-
-  type PlaceGetPayload<S extends boolean | null | undefined | PlaceDefaultArgs> = $Result.GetResult<Prisma.$PlacePayload, S>
-
-  type PlaceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PlaceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PlaceCountAggregateInputType | true
-    }
-
-  export interface PlaceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Place'], meta: { name: 'Place' } }
-    /**
-     * Find zero or one Place that matches the filter.
-     * @param {PlaceFindUniqueArgs} args - Arguments to find a Place
-     * @example
-     * // Get one Place
-     * const place = await prisma.place.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PlaceFindUniqueArgs>(args: SelectSubset<T, PlaceFindUniqueArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Place that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PlaceFindUniqueOrThrowArgs} args - Arguments to find a Place
-     * @example
-     * // Get one Place
-     * const place = await prisma.place.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PlaceFindUniqueOrThrowArgs>(args: SelectSubset<T, PlaceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Place that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PlaceFindFirstArgs} args - Arguments to find a Place
-     * @example
-     * // Get one Place
-     * const place = await prisma.place.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PlaceFindFirstArgs>(args?: SelectSubset<T, PlaceFindFirstArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Place that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PlaceFindFirstOrThrowArgs} args - Arguments to find a Place
-     * @example
-     * // Get one Place
-     * const place = await prisma.place.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PlaceFindFirstOrThrowArgs>(args?: SelectSubset<T, PlaceFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Places that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PlaceFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Places
-     * const places = await prisma.place.findMany()
-     * 
-     * // Get first 10 Places
-     * const places = await prisma.place.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const placeWithIdOnly = await prisma.place.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PlaceFindManyArgs>(args?: SelectSubset<T, PlaceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Place.
-     * @param {PlaceCreateArgs} args - Arguments to create a Place.
-     * @example
-     * // Create one Place
-     * const Place = await prisma.place.create({
-     *   data: {
-     *     // ... data to create a Place
-     *   }
-     * })
-     * 
-     */
-    create<T extends PlaceCreateArgs>(args: SelectSubset<T, PlaceCreateArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Places.
-     * @param {PlaceCreateManyArgs} args - Arguments to create many Places.
-     * @example
-     * // Create many Places
-     * const place = await prisma.place.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PlaceCreateManyArgs>(args?: SelectSubset<T, PlaceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Places and returns the data saved in the database.
-     * @param {PlaceCreateManyAndReturnArgs} args - Arguments to create many Places.
-     * @example
-     * // Create many Places
-     * const place = await prisma.place.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Places and only return the `id`
-     * const placeWithIdOnly = await prisma.place.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PlaceCreateManyAndReturnArgs>(args?: SelectSubset<T, PlaceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Place.
-     * @param {PlaceDeleteArgs} args - Arguments to delete one Place.
-     * @example
-     * // Delete one Place
-     * const Place = await prisma.place.delete({
-     *   where: {
-     *     // ... filter to delete one Place
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PlaceDeleteArgs>(args: SelectSubset<T, PlaceDeleteArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Place.
-     * @param {PlaceUpdateArgs} args - Arguments to update one Place.
-     * @example
-     * // Update one Place
-     * const place = await prisma.place.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PlaceUpdateArgs>(args: SelectSubset<T, PlaceUpdateArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Places.
-     * @param {PlaceDeleteManyArgs} args - Arguments to filter Places to delete.
-     * @example
-     * // Delete a few Places
-     * const { count } = await prisma.place.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PlaceDeleteManyArgs>(args?: SelectSubset<T, PlaceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Places.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PlaceUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Places
-     * const place = await prisma.place.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PlaceUpdateManyArgs>(args: SelectSubset<T, PlaceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Places and returns the data updated in the database.
-     * @param {PlaceUpdateManyAndReturnArgs} args - Arguments to update many Places.
-     * @example
-     * // Update many Places
-     * const place = await prisma.place.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Places and only return the `id`
-     * const placeWithIdOnly = await prisma.place.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PlaceUpdateManyAndReturnArgs>(args: SelectSubset<T, PlaceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Place.
-     * @param {PlaceUpsertArgs} args - Arguments to update or create a Place.
-     * @example
-     * // Update or create a Place
-     * const place = await prisma.place.upsert({
-     *   create: {
-     *     // ... data to create a Place
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Place we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PlaceUpsertArgs>(args: SelectSubset<T, PlaceUpsertArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Places.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PlaceCountArgs} args - Arguments to filter Places to count.
-     * @example
-     * // Count the number of Places
-     * const count = await prisma.place.count({
-     *   where: {
-     *     // ... the filter for the Places we want to count
-     *   }
-     * })
-    **/
-    count<T extends PlaceCountArgs>(
-      args?: Subset<T, PlaceCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PlaceCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Place.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PlaceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PlaceAggregateArgs>(args: Subset<T, PlaceAggregateArgs>): Prisma.PrismaPromise<GetPlaceAggregateType<T>>
-
-    /**
-     * Group by Place.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PlaceGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PlaceGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PlaceGroupByArgs['orderBy'] }
-        : { orderBy?: PlaceGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PlaceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlaceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Place model
-   */
-  readonly fields: PlaceFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Place.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PlaceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    Codes<T extends Place$CodesArgs<ExtArgs> = {}>(args?: Subset<T, Place$CodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Place model
-   */
-  interface PlaceFieldRefs {
-    readonly id: FieldRef<"Place", 'Int'>
-    readonly name: FieldRef<"Place", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Place findUnique
-   */
-  export type PlaceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * Filter, which Place to fetch.
-     */
-    where: PlaceWhereUniqueInput
-  }
-
-  /**
-   * Place findUniqueOrThrow
-   */
-  export type PlaceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * Filter, which Place to fetch.
-     */
-    where: PlaceWhereUniqueInput
-  }
-
-  /**
-   * Place findFirst
-   */
-  export type PlaceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * Filter, which Place to fetch.
-     */
-    where?: PlaceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Places to fetch.
-     */
-    orderBy?: PlaceOrderByWithRelationInput | PlaceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Places.
-     */
-    cursor?: PlaceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Places from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Places.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Places.
-     */
-    distinct?: PlaceScalarFieldEnum | PlaceScalarFieldEnum[]
-  }
-
-  /**
-   * Place findFirstOrThrow
-   */
-  export type PlaceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * Filter, which Place to fetch.
-     */
-    where?: PlaceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Places to fetch.
-     */
-    orderBy?: PlaceOrderByWithRelationInput | PlaceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Places.
-     */
-    cursor?: PlaceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Places from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Places.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Places.
-     */
-    distinct?: PlaceScalarFieldEnum | PlaceScalarFieldEnum[]
-  }
-
-  /**
-   * Place findMany
-   */
-  export type PlaceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * Filter, which Places to fetch.
-     */
-    where?: PlaceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Places to fetch.
-     */
-    orderBy?: PlaceOrderByWithRelationInput | PlaceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Places.
-     */
-    cursor?: PlaceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Places from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Places.
-     */
-    skip?: number
-    distinct?: PlaceScalarFieldEnum | PlaceScalarFieldEnum[]
-  }
-
-  /**
-   * Place create
-   */
-  export type PlaceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Place.
-     */
-    data: XOR<PlaceCreateInput, PlaceUncheckedCreateInput>
-  }
-
-  /**
-   * Place createMany
-   */
-  export type PlaceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Places.
-     */
-    data: PlaceCreateManyInput | PlaceCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Place createManyAndReturn
-   */
-  export type PlaceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * The data used to create many Places.
-     */
-    data: PlaceCreateManyInput | PlaceCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Place update
-   */
-  export type PlaceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Place.
-     */
-    data: XOR<PlaceUpdateInput, PlaceUncheckedUpdateInput>
-    /**
-     * Choose, which Place to update.
-     */
-    where: PlaceWhereUniqueInput
-  }
-
-  /**
-   * Place updateMany
-   */
-  export type PlaceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Places.
-     */
-    data: XOR<PlaceUpdateManyMutationInput, PlaceUncheckedUpdateManyInput>
-    /**
-     * Filter which Places to update
-     */
-    where?: PlaceWhereInput
-    /**
-     * Limit how many Places to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Place updateManyAndReturn
-   */
-  export type PlaceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * The data used to update Places.
-     */
-    data: XOR<PlaceUpdateManyMutationInput, PlaceUncheckedUpdateManyInput>
-    /**
-     * Filter which Places to update
-     */
-    where?: PlaceWhereInput
-    /**
-     * Limit how many Places to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Place upsert
-   */
-  export type PlaceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Place to update in case it exists.
-     */
-    where: PlaceWhereUniqueInput
-    /**
-     * In case the Place found by the `where` argument doesn't exist, create a new Place with this data.
-     */
-    create: XOR<PlaceCreateInput, PlaceUncheckedCreateInput>
-    /**
-     * In case the Place was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PlaceUpdateInput, PlaceUncheckedUpdateInput>
-  }
-
-  /**
-   * Place delete
-   */
-  export type PlaceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-    /**
-     * Filter which Place to delete.
-     */
-    where: PlaceWhereUniqueInput
-  }
-
-  /**
-   * Place deleteMany
-   */
-  export type PlaceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Places to delete
-     */
-    where?: PlaceWhereInput
-    /**
-     * Limit how many Places to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Place.Codes
-   */
-  export type Place$CodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Code
-     */
-    select?: CodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Code
-     */
-    omit?: CodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CodeInclude<ExtArgs> | null
-    where?: CodeWhereInput
-    orderBy?: CodeOrderByWithRelationInput | CodeOrderByWithRelationInput[]
-    cursor?: CodeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CodeScalarFieldEnum | CodeScalarFieldEnum[]
-  }
-
-  /**
-   * Place without action
-   */
-  export type PlaceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Place
-     */
-    select?: PlaceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Place
-     */
-    omit?: PlaceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PlaceInclude<ExtArgs> | null
-  }
-
 
   /**
    * Model User
@@ -2170,18 +1032,24 @@ export namespace Prisma {
     id: number | null
     username: string | null
     password: string | null
+    name: string | null
+    role: $Enums.UserRole | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: number | null
     username: string | null
     password: string | null
+    name: string | null
+    role: $Enums.UserRole | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     username: number
     password: number
+    name: number
+    role: number
     _all: number
   }
 
@@ -2198,18 +1066,24 @@ export namespace Prisma {
     id?: true
     username?: true
     password?: true
+    name?: true
+    role?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     username?: true
     password?: true
+    name?: true
+    role?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     username?: true
     password?: true
+    name?: true
+    role?: true
     _all?: true
   }
 
@@ -2303,6 +1177,8 @@ export namespace Prisma {
     id: number
     username: string
     password: string
+    name: string
+    role: $Enums.UserRole
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -2328,35 +1204,55 @@ export namespace Prisma {
     id?: boolean
     username?: boolean
     password?: boolean
+    name?: boolean
+    role?: boolean
+    Codes?: boolean | User$CodesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     username?: boolean
     password?: boolean
+    name?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     username?: boolean
     password?: boolean
+    name?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     username?: boolean
     password?: boolean
+    name?: boolean
+    role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "name" | "role", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Codes?: boolean | User$CodesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {}
+    objects: {
+      Codes: Prisma.$CodePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       username: string
       password: string
+      name: string
+      role: $Enums.UserRole
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2751,6 +1647,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    Codes<T extends User$CodesArgs<ExtArgs> = {}>(args?: Subset<T, User$CodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2783,6 +1680,8 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'Int'>
     readonly username: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'UserRole'>
   }
     
 
@@ -2799,6 +1698,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -2818,6 +1721,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -2835,6 +1742,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -2884,6 +1795,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -2932,6 +1847,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -2974,6 +1893,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      */
@@ -3022,6 +1945,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -3089,6 +2016,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -3115,6 +2046,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -3135,6 +2070,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.Codes
+   */
+  export type User$CodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Code
+     */
+    select?: CodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Code
+     */
+    omit?: CodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodeInclude<ExtArgs> | null
+    where?: CodeWhereInput
+    orderBy?: CodeOrderByWithRelationInput | CodeOrderByWithRelationInput[]
+    cursor?: CodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CodeScalarFieldEnum | CodeScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3146,6 +2105,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -3163,12 +2126,12 @@ export namespace Prisma {
 
   export type CodeAvgAggregateOutputType = {
     id: number | null
-    placeId: number | null
+    userId: number | null
   }
 
   export type CodeSumAggregateOutputType = {
     id: number | null
-    placeId: number | null
+    userId: number | null
   }
 
   export type CodeMinAggregateOutputType = {
@@ -3182,7 +2145,8 @@ export namespace Prisma {
     province: string | null
     usedAt: string | null
     createdAt: string | null
-    placeId: number | null
+    webId: string | null
+    userId: number | null
   }
 
   export type CodeMaxAggregateOutputType = {
@@ -3196,7 +2160,8 @@ export namespace Prisma {
     province: string | null
     usedAt: string | null
     createdAt: string | null
-    placeId: number | null
+    webId: string | null
+    userId: number | null
   }
 
   export type CodeCountAggregateOutputType = {
@@ -3210,19 +2175,20 @@ export namespace Prisma {
     province: number
     usedAt: number
     createdAt: number
-    placeId: number
+    webId: number
+    userId: number
     _all: number
   }
 
 
   export type CodeAvgAggregateInputType = {
     id?: true
-    placeId?: true
+    userId?: true
   }
 
   export type CodeSumAggregateInputType = {
     id?: true
-    placeId?: true
+    userId?: true
   }
 
   export type CodeMinAggregateInputType = {
@@ -3236,7 +2202,8 @@ export namespace Prisma {
     province?: true
     usedAt?: true
     createdAt?: true
-    placeId?: true
+    webId?: true
+    userId?: true
   }
 
   export type CodeMaxAggregateInputType = {
@@ -3250,7 +2217,8 @@ export namespace Prisma {
     province?: true
     usedAt?: true
     createdAt?: true
-    placeId?: true
+    webId?: true
+    userId?: true
   }
 
   export type CodeCountAggregateInputType = {
@@ -3264,7 +2232,8 @@ export namespace Prisma {
     province?: true
     usedAt?: true
     createdAt?: true
-    placeId?: true
+    webId?: true
+    userId?: true
     _all?: true
   }
 
@@ -3365,7 +2334,8 @@ export namespace Prisma {
     province: string
     usedAt: string | null
     createdAt: string
-    placeId: number | null
+    webId: string
+    userId: number | null
     _count: CodeCountAggregateOutputType | null
     _avg: CodeAvgAggregateOutputType | null
     _sum: CodeSumAggregateOutputType | null
@@ -3398,8 +2368,9 @@ export namespace Prisma {
     province?: boolean
     usedAt?: boolean
     createdAt?: boolean
-    placeId?: boolean
-    Place?: boolean | Code$PlaceArgs<ExtArgs>
+    webId?: boolean
+    userId?: boolean
+    User?: boolean | Code$UserArgs<ExtArgs>
   }, ExtArgs["result"]["code"]>
 
   export type CodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3413,8 +2384,9 @@ export namespace Prisma {
     province?: boolean
     usedAt?: boolean
     createdAt?: boolean
-    placeId?: boolean
-    Place?: boolean | Code$PlaceArgs<ExtArgs>
+    webId?: boolean
+    userId?: boolean
+    User?: boolean | Code$UserArgs<ExtArgs>
   }, ExtArgs["result"]["code"]>
 
   export type CodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3428,8 +2400,9 @@ export namespace Prisma {
     province?: boolean
     usedAt?: boolean
     createdAt?: boolean
-    placeId?: boolean
-    Place?: boolean | Code$PlaceArgs<ExtArgs>
+    webId?: boolean
+    userId?: boolean
+    User?: boolean | Code$UserArgs<ExtArgs>
   }, ExtArgs["result"]["code"]>
 
   export type CodeSelectScalar = {
@@ -3443,24 +2416,25 @@ export namespace Prisma {
     province?: boolean
     usedAt?: boolean
     createdAt?: boolean
-    placeId?: boolean
+    webId?: boolean
+    userId?: boolean
   }
 
-  export type CodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "used" | "email" | "name" | "phone" | "locality" | "province" | "usedAt" | "createdAt" | "placeId", ExtArgs["result"]["code"]>
+  export type CodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "used" | "email" | "name" | "phone" | "locality" | "province" | "usedAt" | "createdAt" | "webId" | "userId", ExtArgs["result"]["code"]>
   export type CodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Place?: boolean | Code$PlaceArgs<ExtArgs>
+    User?: boolean | Code$UserArgs<ExtArgs>
   }
   export type CodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Place?: boolean | Code$PlaceArgs<ExtArgs>
+    User?: boolean | Code$UserArgs<ExtArgs>
   }
   export type CodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Place?: boolean | Code$PlaceArgs<ExtArgs>
+    User?: boolean | Code$UserArgs<ExtArgs>
   }
 
   export type $CodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Code"
     objects: {
-      Place: Prisma.$PlacePayload<ExtArgs> | null
+      User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3473,7 +2447,8 @@ export namespace Prisma {
       province: string
       usedAt: string | null
       createdAt: string
-      placeId: number | null
+      webId: string
+      userId: number | null
     }, ExtArgs["result"]["code"]>
     composites: {}
   }
@@ -3868,7 +2843,7 @@ export namespace Prisma {
    */
   export interface Prisma__CodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Place<T extends Code$PlaceArgs<ExtArgs> = {}>(args?: Subset<T, Code$PlaceArgs<ExtArgs>>): Prisma__PlaceClient<$Result.GetResult<Prisma.$PlacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    User<T extends Code$UserArgs<ExtArgs> = {}>(args?: Subset<T, Code$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3908,7 +2883,8 @@ export namespace Prisma {
     readonly province: FieldRef<"Code", 'String'>
     readonly usedAt: FieldRef<"Code", 'String'>
     readonly createdAt: FieldRef<"Code", 'String'>
-    readonly placeId: FieldRef<"Code", 'Int'>
+    readonly webId: FieldRef<"Code", 'String'>
+    readonly userId: FieldRef<"Code", 'Int'>
   }
     
 
@@ -4305,22 +3281,22 @@ export namespace Prisma {
   }
 
   /**
-   * Code.Place
+   * Code.User
    */
-  export type Code$PlaceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Code$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Place
+     * Select specific fields to fetch from the User
      */
-    select?: PlaceSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Place
+     * Omit specific fields from the User
      */
-    omit?: PlaceOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PlaceInclude<ExtArgs> | null
-    where?: PlaceWhereInput
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -4356,18 +3332,12 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const PlaceScalarFieldEnum: {
-    id: 'id',
-    name: 'name'
-  };
-
-  export type PlaceScalarFieldEnum = (typeof PlaceScalarFieldEnum)[keyof typeof PlaceScalarFieldEnum]
-
-
   export const UserScalarFieldEnum: {
     id: 'id',
     username: 'username',
-    password: 'password'
+    password: 'password',
+    name: 'name',
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4384,7 +3354,8 @@ export namespace Prisma {
     province: 'province',
     usedAt: 'usedAt',
     createdAt: 'createdAt',
-    placeId: 'placeId'
+    webId: 'webId',
+    userId: 'userId'
   };
 
   export type CodeScalarFieldEnum = (typeof CodeScalarFieldEnum)[keyof typeof CodeScalarFieldEnum]
@@ -4448,6 +3419,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'UserRole'
+   */
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -4471,48 +3456,6 @@ export namespace Prisma {
    */
 
 
-  export type PlaceWhereInput = {
-    AND?: PlaceWhereInput | PlaceWhereInput[]
-    OR?: PlaceWhereInput[]
-    NOT?: PlaceWhereInput | PlaceWhereInput[]
-    id?: IntFilter<"Place"> | number
-    name?: StringFilter<"Place"> | string
-    Codes?: CodeListRelationFilter
-  }
-
-  export type PlaceOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    Codes?: CodeOrderByRelationAggregateInput
-  }
-
-  export type PlaceWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: PlaceWhereInput | PlaceWhereInput[]
-    OR?: PlaceWhereInput[]
-    NOT?: PlaceWhereInput | PlaceWhereInput[]
-    name?: StringFilter<"Place"> | string
-    Codes?: CodeListRelationFilter
-  }, "id">
-
-  export type PlaceOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    _count?: PlaceCountOrderByAggregateInput
-    _avg?: PlaceAvgOrderByAggregateInput
-    _max?: PlaceMaxOrderByAggregateInput
-    _min?: PlaceMinOrderByAggregateInput
-    _sum?: PlaceSumOrderByAggregateInput
-  }
-
-  export type PlaceScalarWhereWithAggregatesInput = {
-    AND?: PlaceScalarWhereWithAggregatesInput | PlaceScalarWhereWithAggregatesInput[]
-    OR?: PlaceScalarWhereWithAggregatesInput[]
-    NOT?: PlaceScalarWhereWithAggregatesInput | PlaceScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Place"> | number
-    name?: StringWithAggregatesFilter<"Place"> | string
-  }
-
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -4520,12 +3463,18 @@ export namespace Prisma {
     id?: IntFilter<"User"> | number
     username?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    Codes?: CodeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     username?: SortOrder
     password?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    Codes?: CodeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4535,12 +3484,17 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    Codes?: CodeListRelationFilter
   }, "id" | "username">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     username?: SortOrder
     password?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -4555,6 +3509,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"User"> | number
     username?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
+    name?: StringWithAggregatesFilter<"User"> | string
+    role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   }
 
   export type CodeWhereInput = {
@@ -4571,8 +3527,9 @@ export namespace Prisma {
     province?: StringFilter<"Code"> | string
     usedAt?: StringNullableFilter<"Code"> | string | null
     createdAt?: StringFilter<"Code"> | string
-    placeId?: IntNullableFilter<"Code"> | number | null
-    Place?: XOR<PlaceNullableScalarRelationFilter, PlaceWhereInput> | null
+    webId?: StringFilter<"Code"> | string
+    userId?: IntNullableFilter<"Code"> | number | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type CodeOrderByWithRelationInput = {
@@ -4586,8 +3543,9 @@ export namespace Prisma {
     province?: SortOrder
     usedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    placeId?: SortOrderInput | SortOrder
-    Place?: PlaceOrderByWithRelationInput
+    webId?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    User?: UserOrderByWithRelationInput
   }
 
   export type CodeWhereUniqueInput = Prisma.AtLeast<{
@@ -4604,8 +3562,9 @@ export namespace Prisma {
     province?: StringFilter<"Code"> | string
     usedAt?: StringNullableFilter<"Code"> | string | null
     createdAt?: StringFilter<"Code"> | string
-    placeId?: IntNullableFilter<"Code"> | number | null
-    Place?: XOR<PlaceNullableScalarRelationFilter, PlaceWhereInput> | null
+    webId?: StringFilter<"Code"> | string
+    userId?: IntNullableFilter<"Code"> | number | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "code">
 
   export type CodeOrderByWithAggregationInput = {
@@ -4619,7 +3578,8 @@ export namespace Prisma {
     province?: SortOrder
     usedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    placeId?: SortOrderInput | SortOrder
+    webId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: CodeCountOrderByAggregateInput
     _avg?: CodeAvgOrderByAggregateInput
     _max?: CodeMaxOrderByAggregateInput
@@ -4641,82 +3601,65 @@ export namespace Prisma {
     province?: StringWithAggregatesFilter<"Code"> | string
     usedAt?: StringNullableWithAggregatesFilter<"Code"> | string | null
     createdAt?: StringWithAggregatesFilter<"Code"> | string
-    placeId?: IntNullableWithAggregatesFilter<"Code"> | number | null
-  }
-
-  export type PlaceCreateInput = {
-    name: string
-    Codes?: CodeCreateNestedManyWithoutPlaceInput
-  }
-
-  export type PlaceUncheckedCreateInput = {
-    id?: number
-    name: string
-    Codes?: CodeUncheckedCreateNestedManyWithoutPlaceInput
-  }
-
-  export type PlaceUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    Codes?: CodeUpdateManyWithoutPlaceNestedInput
-  }
-
-  export type PlaceUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    Codes?: CodeUncheckedUpdateManyWithoutPlaceNestedInput
-  }
-
-  export type PlaceCreateManyInput = {
-    id?: number
-    name: string
-  }
-
-  export type PlaceUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PlaceUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    webId?: StringWithAggregatesFilter<"Code"> | string
+    userId?: IntNullableWithAggregatesFilter<"Code"> | number | null
   }
 
   export type UserCreateInput = {
     username: string
     password: string
+    name: string
+    role?: $Enums.UserRole
+    Codes?: CodeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: number
     username: string
     password: string
+    name: string
+    role?: $Enums.UserRole
+    Codes?: CodeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    Codes?: CodeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    Codes?: CodeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: number
     username: string
     password: string
+    name: string
+    role?: $Enums.UserRole
   }
 
   export type UserUpdateManyMutationInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   }
 
   export type CodeCreateInput = {
@@ -4729,7 +3672,8 @@ export namespace Prisma {
     province: string
     usedAt?: string | null
     createdAt: string
-    Place?: PlaceCreateNestedOneWithoutCodesInput
+    webId: string
+    User?: UserCreateNestedOneWithoutCodesInput
   }
 
   export type CodeUncheckedCreateInput = {
@@ -4743,7 +3687,8 @@ export namespace Prisma {
     province: string
     usedAt?: string | null
     createdAt: string
-    placeId?: number | null
+    webId: string
+    userId?: number | null
   }
 
   export type CodeUpdateInput = {
@@ -4756,7 +3701,8 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     usedAt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
-    Place?: PlaceUpdateOneWithoutCodesNestedInput
+    webId?: StringFieldUpdateOperationsInput | string
+    User?: UserUpdateOneWithoutCodesNestedInput
   }
 
   export type CodeUncheckedUpdateInput = {
@@ -4770,7 +3716,8 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     usedAt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
-    placeId?: NullableIntFieldUpdateOperationsInput | number | null
+    webId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CodeCreateManyInput = {
@@ -4784,7 +3731,8 @@ export namespace Prisma {
     province: string
     usedAt?: string | null
     createdAt: string
-    placeId?: number | null
+    webId: string
+    userId?: number | null
   }
 
   export type CodeUpdateManyMutationInput = {
@@ -4797,6 +3745,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     usedAt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CodeUncheckedUpdateManyInput = {
@@ -4810,7 +3759,8 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     usedAt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
-    placeId?: NullableIntFieldUpdateOperationsInput | number | null
+    webId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4839,6 +3789,13 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type EnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
   export type CodeListRelationFilter = {
     every?: CodeWhereInput
     some?: CodeWhereInput
@@ -4849,26 +3806,35 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type PlaceCountOrderByAggregateInput = {
+  export type UserCountOrderByAggregateInput = {
     id?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
   }
 
-  export type PlaceAvgOrderByAggregateInput = {
+  export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type PlaceMaxOrderByAggregateInput = {
+  export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
   }
 
-  export type PlaceMinOrderByAggregateInput = {
+  export type UserMinOrderByAggregateInput = {
     id?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
     name?: SortOrder
+    role?: SortOrder
   }
 
-  export type PlaceSumOrderByAggregateInput = {
+  export type UserSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -4906,30 +3872,14 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type UserCountOrderByAggregateInput = {
-    id?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-  }
-
-  export type UserAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type UserMaxOrderByAggregateInput = {
-    id?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-  }
-
-  export type UserMinOrderByAggregateInput = {
-    id?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-  }
-
-  export type UserSumOrderByAggregateInput = {
-    id?: SortOrder
+  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
   export type BoolNullableFilter<$PrismaModel = never> = {
@@ -4963,9 +3913,9 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type PlaceNullableScalarRelationFilter = {
-    is?: PlaceWhereInput | null
-    isNot?: PlaceWhereInput | null
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -4984,12 +3934,13 @@ export namespace Prisma {
     province?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
-    placeId?: SortOrder
+    webId?: SortOrder
+    userId?: SortOrder
   }
 
   export type CodeAvgOrderByAggregateInput = {
     id?: SortOrder
-    placeId?: SortOrder
+    userId?: SortOrder
   }
 
   export type CodeMaxOrderByAggregateInput = {
@@ -5003,7 +3954,8 @@ export namespace Prisma {
     province?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
-    placeId?: SortOrder
+    webId?: SortOrder
+    userId?: SortOrder
   }
 
   export type CodeMinOrderByAggregateInput = {
@@ -5017,12 +3969,13 @@ export namespace Prisma {
     province?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
-    placeId?: SortOrder
+    webId?: SortOrder
+    userId?: SortOrder
   }
 
   export type CodeSumOrderByAggregateInput = {
     id?: SortOrder
-    placeId?: SortOrder
+    userId?: SortOrder
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5067,17 +4020,17 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type CodeCreateNestedManyWithoutPlaceInput = {
-    create?: XOR<CodeCreateWithoutPlaceInput, CodeUncheckedCreateWithoutPlaceInput> | CodeCreateWithoutPlaceInput[] | CodeUncheckedCreateWithoutPlaceInput[]
-    connectOrCreate?: CodeCreateOrConnectWithoutPlaceInput | CodeCreateOrConnectWithoutPlaceInput[]
-    createMany?: CodeCreateManyPlaceInputEnvelope
+  export type CodeCreateNestedManyWithoutUserInput = {
+    create?: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput> | CodeCreateWithoutUserInput[] | CodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CodeCreateOrConnectWithoutUserInput | CodeCreateOrConnectWithoutUserInput[]
+    createMany?: CodeCreateManyUserInputEnvelope
     connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
   }
 
-  export type CodeUncheckedCreateNestedManyWithoutPlaceInput = {
-    create?: XOR<CodeCreateWithoutPlaceInput, CodeUncheckedCreateWithoutPlaceInput> | CodeCreateWithoutPlaceInput[] | CodeUncheckedCreateWithoutPlaceInput[]
-    connectOrCreate?: CodeCreateOrConnectWithoutPlaceInput | CodeCreateOrConnectWithoutPlaceInput[]
-    createMany?: CodeCreateManyPlaceInputEnvelope
+  export type CodeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput> | CodeCreateWithoutUserInput[] | CodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CodeCreateOrConnectWithoutUserInput | CodeCreateOrConnectWithoutUserInput[]
+    createMany?: CodeCreateManyUserInputEnvelope
     connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
   }
 
@@ -5085,17 +4038,21 @@ export namespace Prisma {
     set?: string
   }
 
-  export type CodeUpdateManyWithoutPlaceNestedInput = {
-    create?: XOR<CodeCreateWithoutPlaceInput, CodeUncheckedCreateWithoutPlaceInput> | CodeCreateWithoutPlaceInput[] | CodeUncheckedCreateWithoutPlaceInput[]
-    connectOrCreate?: CodeCreateOrConnectWithoutPlaceInput | CodeCreateOrConnectWithoutPlaceInput[]
-    upsert?: CodeUpsertWithWhereUniqueWithoutPlaceInput | CodeUpsertWithWhereUniqueWithoutPlaceInput[]
-    createMany?: CodeCreateManyPlaceInputEnvelope
+  export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole
+  }
+
+  export type CodeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput> | CodeCreateWithoutUserInput[] | CodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CodeCreateOrConnectWithoutUserInput | CodeCreateOrConnectWithoutUserInput[]
+    upsert?: CodeUpsertWithWhereUniqueWithoutUserInput | CodeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CodeCreateManyUserInputEnvelope
     set?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
     disconnect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
     delete?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
     connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    update?: CodeUpdateWithWhereUniqueWithoutPlaceInput | CodeUpdateWithWhereUniqueWithoutPlaceInput[]
-    updateMany?: CodeUpdateManyWithWhereWithoutPlaceInput | CodeUpdateManyWithWhereWithoutPlaceInput[]
+    update?: CodeUpdateWithWhereUniqueWithoutUserInput | CodeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CodeUpdateManyWithWhereWithoutUserInput | CodeUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CodeScalarWhereInput | CodeScalarWhereInput[]
   }
 
@@ -5107,24 +4064,24 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type CodeUncheckedUpdateManyWithoutPlaceNestedInput = {
-    create?: XOR<CodeCreateWithoutPlaceInput, CodeUncheckedCreateWithoutPlaceInput> | CodeCreateWithoutPlaceInput[] | CodeUncheckedCreateWithoutPlaceInput[]
-    connectOrCreate?: CodeCreateOrConnectWithoutPlaceInput | CodeCreateOrConnectWithoutPlaceInput[]
-    upsert?: CodeUpsertWithWhereUniqueWithoutPlaceInput | CodeUpsertWithWhereUniqueWithoutPlaceInput[]
-    createMany?: CodeCreateManyPlaceInputEnvelope
+  export type CodeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput> | CodeCreateWithoutUserInput[] | CodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CodeCreateOrConnectWithoutUserInput | CodeCreateOrConnectWithoutUserInput[]
+    upsert?: CodeUpsertWithWhereUniqueWithoutUserInput | CodeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CodeCreateManyUserInputEnvelope
     set?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
     disconnect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
     delete?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
     connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    update?: CodeUpdateWithWhereUniqueWithoutPlaceInput | CodeUpdateWithWhereUniqueWithoutPlaceInput[]
-    updateMany?: CodeUpdateManyWithWhereWithoutPlaceInput | CodeUpdateManyWithWhereWithoutPlaceInput[]
+    update?: CodeUpdateWithWhereUniqueWithoutUserInput | CodeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CodeUpdateManyWithWhereWithoutUserInput | CodeUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CodeScalarWhereInput | CodeScalarWhereInput[]
   }
 
-  export type PlaceCreateNestedOneWithoutCodesInput = {
-    create?: XOR<PlaceCreateWithoutCodesInput, PlaceUncheckedCreateWithoutCodesInput>
-    connectOrCreate?: PlaceCreateOrConnectWithoutCodesInput
-    connect?: PlaceWhereUniqueInput
+  export type UserCreateNestedOneWithoutCodesInput = {
+    create?: XOR<UserCreateWithoutCodesInput, UserUncheckedCreateWithoutCodesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCodesInput
+    connect?: UserWhereUniqueInput
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -5135,14 +4092,14 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type PlaceUpdateOneWithoutCodesNestedInput = {
-    create?: XOR<PlaceCreateWithoutCodesInput, PlaceUncheckedCreateWithoutCodesInput>
-    connectOrCreate?: PlaceCreateOrConnectWithoutCodesInput
-    upsert?: PlaceUpsertWithoutCodesInput
-    disconnect?: PlaceWhereInput | boolean
-    delete?: PlaceWhereInput | boolean
-    connect?: PlaceWhereUniqueInput
-    update?: XOR<XOR<PlaceUpdateToOneWithWhereWithoutCodesInput, PlaceUpdateWithoutCodesInput>, PlaceUncheckedUpdateWithoutCodesInput>
+  export type UserUpdateOneWithoutCodesNestedInput = {
+    create?: XOR<UserCreateWithoutCodesInput, UserUncheckedCreateWithoutCodesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCodesInput
+    upsert?: UserUpsertWithoutCodesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCodesInput, UserUpdateWithoutCodesInput>, UserUncheckedUpdateWithoutCodesInput>
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -5176,6 +4133,13 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -5220,6 +4184,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
@@ -5304,7 +4278,7 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type CodeCreateWithoutPlaceInput = {
+  export type CodeCreateWithoutUserInput = {
     code: string
     used?: boolean | null
     email: string
@@ -5314,9 +4288,10 @@ export namespace Prisma {
     province: string
     usedAt?: string | null
     createdAt: string
+    webId: string
   }
 
-  export type CodeUncheckedCreateWithoutPlaceInput = {
+  export type CodeUncheckedCreateWithoutUserInput = {
     id?: number
     code: string
     used?: boolean | null
@@ -5327,32 +4302,33 @@ export namespace Prisma {
     province: string
     usedAt?: string | null
     createdAt: string
+    webId: string
   }
 
-  export type CodeCreateOrConnectWithoutPlaceInput = {
+  export type CodeCreateOrConnectWithoutUserInput = {
     where: CodeWhereUniqueInput
-    create: XOR<CodeCreateWithoutPlaceInput, CodeUncheckedCreateWithoutPlaceInput>
+    create: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput>
   }
 
-  export type CodeCreateManyPlaceInputEnvelope = {
-    data: CodeCreateManyPlaceInput | CodeCreateManyPlaceInput[]
+  export type CodeCreateManyUserInputEnvelope = {
+    data: CodeCreateManyUserInput | CodeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type CodeUpsertWithWhereUniqueWithoutPlaceInput = {
+  export type CodeUpsertWithWhereUniqueWithoutUserInput = {
     where: CodeWhereUniqueInput
-    update: XOR<CodeUpdateWithoutPlaceInput, CodeUncheckedUpdateWithoutPlaceInput>
-    create: XOR<CodeCreateWithoutPlaceInput, CodeUncheckedCreateWithoutPlaceInput>
+    update: XOR<CodeUpdateWithoutUserInput, CodeUncheckedUpdateWithoutUserInput>
+    create: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput>
   }
 
-  export type CodeUpdateWithWhereUniqueWithoutPlaceInput = {
+  export type CodeUpdateWithWhereUniqueWithoutUserInput = {
     where: CodeWhereUniqueInput
-    data: XOR<CodeUpdateWithoutPlaceInput, CodeUncheckedUpdateWithoutPlaceInput>
+    data: XOR<CodeUpdateWithoutUserInput, CodeUncheckedUpdateWithoutUserInput>
   }
 
-  export type CodeUpdateManyWithWhereWithoutPlaceInput = {
+  export type CodeUpdateManyWithWhereWithoutUserInput = {
     where: CodeScalarWhereInput
-    data: XOR<CodeUpdateManyMutationInput, CodeUncheckedUpdateManyWithoutPlaceInput>
+    data: XOR<CodeUpdateManyMutationInput, CodeUncheckedUpdateManyWithoutUserInput>
   }
 
   export type CodeScalarWhereInput = {
@@ -5369,44 +4345,57 @@ export namespace Prisma {
     province?: StringFilter<"Code"> | string
     usedAt?: StringNullableFilter<"Code"> | string | null
     createdAt?: StringFilter<"Code"> | string
-    placeId?: IntNullableFilter<"Code"> | number | null
+    webId?: StringFilter<"Code"> | string
+    userId?: IntNullableFilter<"Code"> | number | null
   }
 
-  export type PlaceCreateWithoutCodesInput = {
+  export type UserCreateWithoutCodesInput = {
+    username: string
+    password: string
     name: string
+    role?: $Enums.UserRole
   }
 
-  export type PlaceUncheckedCreateWithoutCodesInput = {
+  export type UserUncheckedCreateWithoutCodesInput = {
     id?: number
+    username: string
+    password: string
     name: string
+    role?: $Enums.UserRole
   }
 
-  export type PlaceCreateOrConnectWithoutCodesInput = {
-    where: PlaceWhereUniqueInput
-    create: XOR<PlaceCreateWithoutCodesInput, PlaceUncheckedCreateWithoutCodesInput>
+  export type UserCreateOrConnectWithoutCodesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCodesInput, UserUncheckedCreateWithoutCodesInput>
   }
 
-  export type PlaceUpsertWithoutCodesInput = {
-    update: XOR<PlaceUpdateWithoutCodesInput, PlaceUncheckedUpdateWithoutCodesInput>
-    create: XOR<PlaceCreateWithoutCodesInput, PlaceUncheckedCreateWithoutCodesInput>
-    where?: PlaceWhereInput
+  export type UserUpsertWithoutCodesInput = {
+    update: XOR<UserUpdateWithoutCodesInput, UserUncheckedUpdateWithoutCodesInput>
+    create: XOR<UserCreateWithoutCodesInput, UserUncheckedCreateWithoutCodesInput>
+    where?: UserWhereInput
   }
 
-  export type PlaceUpdateToOneWithWhereWithoutCodesInput = {
-    where?: PlaceWhereInput
-    data: XOR<PlaceUpdateWithoutCodesInput, PlaceUncheckedUpdateWithoutCodesInput>
+  export type UserUpdateToOneWithWhereWithoutCodesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCodesInput, UserUncheckedUpdateWithoutCodesInput>
   }
 
-  export type PlaceUpdateWithoutCodesInput = {
+  export type UserUpdateWithoutCodesInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   }
 
-  export type PlaceUncheckedUpdateWithoutCodesInput = {
+  export type UserUncheckedUpdateWithoutCodesInput = {
     id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   }
 
-  export type CodeCreateManyPlaceInput = {
+  export type CodeCreateManyUserInput = {
     id?: number
     code: string
     used?: boolean | null
@@ -5417,9 +4406,10 @@ export namespace Prisma {
     province: string
     usedAt?: string | null
     createdAt: string
+    webId: string
   }
 
-  export type CodeUpdateWithoutPlaceInput = {
+  export type CodeUpdateWithoutUserInput = {
     code?: StringFieldUpdateOperationsInput | string
     used?: NullableBoolFieldUpdateOperationsInput | boolean | null
     email?: StringFieldUpdateOperationsInput | string
@@ -5429,9 +4419,10 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     usedAt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type CodeUncheckedUpdateWithoutPlaceInput = {
+  export type CodeUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     used?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5442,9 +4433,10 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     usedAt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type CodeUncheckedUpdateManyWithoutPlaceInput = {
+  export type CodeUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     used?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5455,6 +4447,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     usedAt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
   }
 
 

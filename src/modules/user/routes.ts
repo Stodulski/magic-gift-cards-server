@@ -3,6 +3,6 @@ const router = Router()
 import verifySession from '../../middlewares/verifySession'
 import * as placeController from './controller'
 
-router.get('/places', verifySession, placeController.getAllPlaces)
+router.get('/users', verifySession, placeController.getAllPlaces)
 
 export default router

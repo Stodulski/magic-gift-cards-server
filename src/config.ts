@@ -39,7 +39,7 @@ app.use(morgan('dev'))
 // routes
 import authRoutes from './modules/auth/routes'
 import codeRoutes from './modules/codes/routes'
-import placeRoutes from './modules/places/routes'
+import placeRoutes from './modules/user/routes'
 
 app.use('/api/v1', authRoutes)
 app.use('/api/v1', codeRoutes)

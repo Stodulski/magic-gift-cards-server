@@ -15,7 +15,7 @@ router.delete('/auth', authController.logout)
 
 // Endpoint for verify session on front-end
 router.get('/auth', verifySession, (req: Request, res: Response) => {
-  res.status(200).json({ data: { message: 'Logged in.' } })
+  res.status(200).json({ data: { message: 'Logged in.', user: req.user } })
 })
 
 export default router

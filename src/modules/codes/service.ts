@@ -8,10 +8,11 @@ export const create = async (
   email: string,
   locality: string,
   province: string,
-  phone: string
+  phone: string,
+  webId: string
 ) => {
   try {
-    await codeModel.create(code, name, email, locality, province, phone)
+    await codeModel.create(code, name, email, locality, province, phone, webId)
   } catch (error) {
     if (error instanceof ApiError) {
       throw error
@@ -20,12 +21,14 @@ export const create = async (
   }
 }
 
-export const setUsed = async (code: string, placeId: number) => {
+export const setUsed = async (code: string, userId: number) => {
   try {
     await codeModel.findOne(code)
     const date = new Date()
-    const formattedDate = date.toLocaleString('es-AR')
-    await codeModel.update(code, placeId, formattedDate)
+    const formattedDate = date.toLocaleString('es-AR', {
+      timeZone: 'America/Argentina/Buenos_Aires'
+    })
+    await codeModel.update(code, userId, formattedDate)
   } catch (error: any) {
     if (error instanceof ApiError) {
       throw error
@@ -51,7 +54,8 @@ export const getAll = async (cursor: number) => {
         email: true,
         usedAt: true,
         used: true,
-        Place: {
+        webId: true,
+        User: {
           select: {
             id: true,
             name: true
