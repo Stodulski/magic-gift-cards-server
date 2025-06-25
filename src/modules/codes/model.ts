@@ -45,6 +45,7 @@ export const findOne = async (code: string) => {
       },
       select: {
         used: true,
+        usedAt: true,
         User: {
           select: {
             name: true
@@ -53,7 +54,7 @@ export const findOne = async (code: string) => {
       }
     })
     if (result?.used)
-      throw new ApiError(400, `Codigo usado en ${result.User?.name}`)
+      throw new ApiError(400, `Codigo usado en ${result.User?.name} el ${result.usedAt}.`)
     if (!result) throw new ApiError(400, 'El codigo no existe.')
   } catch (error: any) {
     if (error instanceof ApiError) {
