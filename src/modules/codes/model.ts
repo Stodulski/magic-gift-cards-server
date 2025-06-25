@@ -22,7 +22,10 @@ export const create = async (
         province,
         phone,
         webId,
-        createdAt: new Date().toLocaleString('es-AR')
+        createdAt: new Date().toLocaleString('es-AR', {
+          timeZone: 'America/Argentina/Buenos_Aires',
+          hour12: false
+        })
       }
     })
   } catch (error: any) {
