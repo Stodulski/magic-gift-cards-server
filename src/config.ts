@@ -14,12 +14,7 @@ const app = express()
 
 // Settings
 app.set('PORT', process.env.PORT || 3000)
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 60,
-  limit: 20,
-  standardHeaders: 'draft-8',
-  legacyHeaders: false
-})
+
 
 // Middlewares
 app.use(
@@ -33,7 +28,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.json())
 app.use(helmet())
-app.use(limiter)
 app.use(morgan('dev'))
 
 // routes

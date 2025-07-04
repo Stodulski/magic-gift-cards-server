@@ -31,6 +31,7 @@ export const setUsed = async (code: string, userId: number) => {
     })
     await codeModel.update(code, userId, formattedDate)
   } catch (error: any) {
+    console.log(error)
     if (error instanceof ApiError) {
       throw error
     }

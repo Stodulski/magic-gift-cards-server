@@ -41,7 +41,7 @@ export const findOne = async (code: string) => {
   try {
     const result = await prisma.code.findUnique({
       where: {
-        code
+        code: code.toUpperCase()
       },
       select: {
         used: true,
@@ -66,9 +66,10 @@ export const findOne = async (code: string) => {
 
 export const update = async (code: string, userId: number, usedAt: string) => {
   try {
+
     await prisma.code.update({
       where: {
-        code
+        code: code.toUpperCase()
       },
       data: {
         used: true,
